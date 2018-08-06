@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { AppService } from './app.service';
+import { Movie } from '../assets/Movie';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,18 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   title = 'app';
-  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes/';
+  movies: Movie[];
 
-  constructor(private http: HttpClient) {}
 
-  getOne(value: string) {
+  constructor(private movieService: AppService) {}
 
+  getAll(): void {
+    this.movieService.getAll().subscribe(data => {
+      this.movies = data;
+      console.log(data);
+    });
   }
 
-  getAll() {
-    return this.http.get(this.baseUrl);
+  getOne(value): void {
   }
 }
