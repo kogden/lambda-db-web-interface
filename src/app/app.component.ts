@@ -38,7 +38,7 @@ export class AppComponent {
       port: '80',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       }
     };
 
@@ -47,7 +47,17 @@ export class AppComponent {
       'description': description.value,
     };
 
-    this.http.post(this.baseUrl, toJson, options);
+    this.http.post(this.baseUrl, toJson, options).subscribe(
+      (val) => {
+          console.log('POST call successful value returned in body',
+                      val);
+      },
+      response => {
+          console.log('POST call in error', response);
+      },
+      () => {
+          console.log('The POST observable is now completed.');
+      });
     debugger;
   }
 }
