@@ -4,23 +4,24 @@
   <div class="row">
 
     <div class="col text-center">
-      <form target="_self" method="post" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes/">
-        <input type="text" name="create" placeholder="Title">
-        <input type="text" name="create" placeholder="Description...">
-        <button class="btn-success">Create Entry</button>
+      <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
+        <p>[Working]</p>
+        <button class="btn-success" id="noInput" (click)="getAll()">Get All</button>
       </form>
     </div>
 
     <div class="col text-center">
-        <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes/">
-          <button class="btn-success" id="noInput" (click)="getAll()">Get All</button>
-        </form>
+      <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
+        <input type="text" name="getOne" placeholder="Id..." id="takeId" #getonebox>
+        <button class="btn-success" (click)="getOne(getonebox.value)">Get One</button>
+      </form>
     </div>
 
     <div class="col text-center">
-      <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes/">
-        <input type="text" name="getOne" placeholder="Id..." id="takeId" #getonebox>
-        <button class="btn-success" (click)="getOne(getonebox.value)">Get One</button>
+      <form target="_self" method="post" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
+        <input type="text" name="create" placeholder="Title" id="titleEntry">
+        <input type="text" name="create" placeholder="Description..." id="descEntry">
+        <button class="btn-success" (click)="create()">Create Entry</button>
       </form>
     </div>
 

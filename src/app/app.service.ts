@@ -11,9 +11,6 @@ export class AppService {
 
   constructor(private http: HttpClient) {}
 
-  getOne(value: string) {
-
-  }
 
   getAll(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.baseUrl);
