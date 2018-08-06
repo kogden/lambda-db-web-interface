@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <div class="container">
-  <h1 class="text-center">Welcome, this is an example front end for a movie database powered by AWS Lambda functions: </h1>
+  <h1 class="text-center">Welcome to the Movie Database Interface</h1>
+  <h3 class="text-center">Powered by MongoDB and AWS Lambda Functions</h3>
   <div class="row">
 
     <div class="col text-center">
@@ -41,8 +42,8 @@
   </div>
   <div class="row text-center">
     <h2>Output:</h2>
-    <samp *ngIf="movies">
-      <ul>
+    <samp>
+      <ul *ngIf="movies">
         <li *ngFor="let movie of movies">
           <h5>
             {{ movie.title }}
@@ -55,6 +56,16 @@
           <hr>
         </li>
       </ul>
+      <div *ngIf="oneMovie">
+        <h5>
+          {{ oneMovie.title }}
+        </h5>
+        <p>
+          "{{ oneMovie.description }}"
+          <br>
+          id: {{ oneMovie._id }}
+        </p>
+      </div>
       Boop beep bop
     </samp>
   </div>

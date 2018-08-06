@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'app';
   movies: Movie[];
+  oneMovie: Movie;
   baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes';
 
 
@@ -26,13 +27,20 @@ export class AppComponent {
 
   getOne(value): void {
     this.movieService.getAll().subscribe(data => {
-      data.find(movie => movie._id === value);
+      this.oneMovie = data.find(movie => movie._id === value);
     });
+
   }
 
   create() {
     const title = <HTMLInputElement>document.getElementById('titleEntry');
     const description = <HTMLInputElement>document.getElementById('descEntry');
+
+    const toJson = {
+      'title': title.value,
+      'description': description.value,
+    };
+
     const options = {
       host: this.baseUrl,
       port: '80',
@@ -40,11 +48,6 @@ export class AppComponent {
       headers: {
         'Content-Type': 'application/json',
       }
-    };
-
-    const toJson = {
-      'title': title.value,
-      'description': description.value,
     };
 
     this.http.post(this.baseUrl, toJson, options).subscribe(
