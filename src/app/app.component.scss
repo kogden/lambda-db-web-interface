@@ -48,3 +48,11 @@ li {
 .options {
   height:300px;
 }
+
+#getOneStyle {
+  background-color:rgb(255, 226, 173);
+
+  * {
+    padding-left: 10px;
+  }
+}

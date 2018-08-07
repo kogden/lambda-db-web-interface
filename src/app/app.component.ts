@@ -23,19 +23,16 @@ export class AppComponent {
     });
   }
 
-  getOne(value): void {
+  getOne(id): void {
     this.movieService.getAll().subscribe(data => {
-      this.oneMovie = data.find(movie => movie._id === value);
+      this.oneMovie = data.find(movie => movie._id === id);
     });
   }
 
-  create() {
-    const title = <HTMLInputElement>document.getElementById('titleEntry');
-    const description = <HTMLInputElement>document.getElementById('descEntry');
-
+  create(title, desc) {
     const toJson = {
-      'title': title.value,
-      'description': description.value,
+      'title': title,
+      'description': desc,
     };
 
     const options = {
@@ -60,8 +57,8 @@ export class AppComponent {
       });
   }
 
-  delete(value) {
-    const deleteUrl = this.baseUrl + '/' + value;
+  delete(id) {
+    const deleteUrl = this.baseUrl + '/' + id;
     const options = {
       host: deleteUrl,
       port: '80',
@@ -73,14 +70,41 @@ export class AppComponent {
 
     this.http.delete(deleteUrl, options).subscribe(
       (val) => {
-          console.log('POST call successful value returned in body',
-                      val);
+          console.log('DELETE call successful value returned in body', val);
       },
       response => {
-          console.log('POST call in error', response);
+          console.log('DELETE call in error', response);
       },
       () => {
-          console.log('The POST observable is now completed.');
+          console.log('The DELETE observable is now completed.');
+      });
+  }
+
+  update(id, title, desc) {
+    const updateUrl = this.baseUrl + '/' + id;
+    const options = {
+      host: updateUrl,
+      port: '80',
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+
+    const toJson = {
+      'title': title,
+      'description': desc,
+    };
+
+    this.http.put(updateUrl, toJson, options).subscribe(
+      (val) => {
+          console.log('PUT call successful value returned in body', val);
+      },
+      response => {
+          console.log('PUT call in error', response);
+      },
+      () => {
+          console.log('The PUT observable is now completed.');
       });
   }
 }
