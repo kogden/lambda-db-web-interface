@@ -17,6 +17,8 @@ export class AppComponent {
   baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes';   // AWS url we call to hit lambda funcs
   samp = document.getElementsByTagName('samp');   // Grab samp element
   timeToExecute;
+  t0;
+  t1;
 
   constructor(private movieService: AppService, private http: HttpClient) {}
 
@@ -27,23 +29,29 @@ export class AppComponent {
     });
   }
 
+  calculate() {
+    this.timeToExecute = Math.round((this.t1 - this.t0) * 100) / 100;
+    console.log('Lambda call took ' + this.timeToExecute + ' milliseconds.');
+  }
 
   getAll(): void {          // GETs entire database, also used as refresh upon updates
-    const t0 = performance.now();
+    this.t0 = performance.now();
     this.movieService.getAll().subscribe(data => {
       this.movies = data;
       console.log(data);
     });
-    const t1 = performance.now();
-    this.timeToExecute = Math.round((t1 - t0) * 100) / 100;
-    console.log('Lambda call took ' + this.timeToExecute + ' milliseconds.');
+    this.t1 = performance.now();
+    this.calculate();
     this.scrollSampUp();
   }
 
   getOne(id): void {        // GETs one entry with specific and highlights
+    this.t0 = performance.now();
     this.movieService.getAll().subscribe(data => {
       this.oneMovie = data.find(movie => movie._id === id);
     });
+    this.t1 = performance.now();
+    this.calculate();
     this.scrollSampUp();
   }
 
@@ -61,7 +69,7 @@ export class AppComponent {
         'Content-Type': 'application/json'
       }
     };
-
+    this.t0 = performance.now();
     this.http.post(this.baseUrl, toJson, options).subscribe(      // POST, log outcome
       val => {
         console.log('POST call successful value returned in body', val);
@@ -73,6 +81,8 @@ export class AppComponent {
         console.log('The POST observable is now completed.');
       }
     );
+    this.t1 = performance.now();
+    this.calculate();
   }
 
   delete(id) {                        // DELETE req
@@ -86,6 +96,7 @@ export class AppComponent {
       }
     };
 
+    this.t0 = performance.now();
     this.http.delete(deleteUrl, options).subscribe(
       val => {
         console.log('DELETE call successful value returned in body', val);
@@ -97,6 +108,8 @@ export class AppComponent {
         console.log('The DELETE observable is now completed.');
       }
     );
+    this.t1 = performance.now();
+    this.calculate();
   }
 
   update(id, title, desc) {   // PUT req
@@ -115,6 +128,7 @@ export class AppComponent {
       description: desc
     };
 
+    this.t0 = performance.now();
     this.http.put(updateUrl, toJson, options).subscribe(
       val => {
         console.log('PUT call successful value returned in body', val);
@@ -126,5 +140,7 @@ export class AppComponent {
         console.log('The PUT observable is now completed.');
       }
     );
+    this.t1 = performance.now();
+    this.calculate();
   }
 }
