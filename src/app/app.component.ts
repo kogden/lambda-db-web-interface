@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AppService } from './app.service';
 import { Movie } from '../assets/Movie';
 import { HttpClient } from '@angular/common/http';
+import { Time } from '@angular/common';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,7 @@ export class AppComponent {
   oneMovie: Movie;      // Select one movie from list
   baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes';   // AWS url we call to hit lambda funcs
   samp = document.getElementsByTagName('samp');   // Grab samp element
+  timeToExecute;
 
   constructor(private movieService: AppService, private http: HttpClient) {}
 
@@ -24,11 +27,16 @@ export class AppComponent {
     });
   }
 
+
   getAll(): void {          // GETs entire database, also used as refresh upon updates
+    const t0 = performance.now();
     this.movieService.getAll().subscribe(data => {
       this.movies = data;
       console.log(data);
     });
+    const t1 = performance.now();
+    this.timeToExecute = Math.round((t1 - t0) * 100) / 100;
+    console.log('Lambda call took ' + this.timeToExecute + ' milliseconds.');
     this.scrollSampUp();
   }
 
