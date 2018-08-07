@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <div class="container">
-  <h1 class="text-center">Welcome to the Movie Database Interface</h1>
-  <p class="text-center" id="poweredBy">Powered by MongoDB and AWS Lambda Functions</p>
+  <div class="header">
+    <h1 class="text-center">Welcome to the Movie Database Interface</h1>
+    <p class="text-center" id="poweredBy">Powered by MongoDB and AWS Lambda Functions</p>
+  </div>
+
   <div class="row options">
 
     <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
-        <button class="btn-success" id="noInput" (click)="getAll()">Get All</button>
+        <button class="btn-primary" id="noInput" (click)="getAll()">Get All</button>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <input type="text" name="getOne" placeholder="Id..." id="takeId" #getonebox>
-        <button class="btn-success" id="noInput" (click)="getOne(getonebox.value); getonebox.value = '' ">Get One</button>
+        <button class="btn-primary" id="noInput" (click)="getOne(getonebox.value); getonebox.value = '' ">Get One</button>
       </form>
     </div>
 
@@ -21,7 +24,8 @@
       <form target="_self" method="post" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <input type="text" name="create" placeholder="Title" id="titleEntry" #titleenter>
         <input type="text" name="create" placeholder="Description..." id="descEntry" #descenter>
-        <button class="btn-success" (click)="create(titleenter.value, descenter.value); titleenter.value = ''; descenter.value = '';" id="noInput">Create</button>
+        <button class="btn-primary" (click)="create(titleenter.value, descenter.value); titleenter.value = ''; descenter.value = '';"
+          id="noInput">Create</button>
       </form>
     </div>
 
@@ -30,14 +34,14 @@
         <input type="text" name="update" placeholder="Id..." #entid>
         <input type="text" name="create" placeholder="Title" id="titleEntry" #enttit>
         <input type="text" name="create" placeholder="Description..." #entdesc>
-        <button class="btn-success" id="noInput" (click)="update(entid.value, enttit.value, entdesc.value); entid.value = ''; enttit.value = ''; entdesc.value = '';">Update</button>
+        <button class="btn-primary" id="noInput" (click)="update(entid.value, enttit.value, entdesc.value); entid.value = ''; enttit.value = ''; entdesc.value = '';">Update</button>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get">
         <input type="text" name="delete" placeholder="Id..." #deletebox>
-        <button class="btn-success" id="noInput" (click)="delete(deletebox.value); deletebox.value = '' ">Delete</button>
+        <button class="btn-primary" id="noInput" (click)="delete(deletebox.value); deletebox.value = '' ">Delete</button>
       </form>
     </div>
 
@@ -52,8 +56,7 @@
         </h5>
         <p>
           "{{ oneMovie.description }}"
-          <br>
-          id: {{ oneMovie._id }}
+          <br> id: {{ oneMovie._id }}
         </p>
         <hr>
       </div>
@@ -64,8 +67,7 @@
           </h5>
           <p>
             "{{ movie.description }}"
-            <br>
-            id: {{ movie._id }}
+            <br> id: {{ movie._id }}
           </p>
           <hr>
         </li>

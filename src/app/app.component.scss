@@ -1,21 +1,29 @@
-@import url("https://fonts.googleapis.com/css?family=Poiret+One");
-$poiret: "Poiret One", cursive;
-$working:rgba(103, 255, 103, 0.486);
-$in-progress:rgba(250, 107, 71, 0.808);
+@import url('https://fonts.googleapis.com/css?family=Vidaloka');
+$vidaloka: 'Vidaloka', serif;
+
+$working: #bee0ff;
+$in-progress: rgba(250, 107, 71, 0.808);
+$head-color:rgb(129, 171, 233);
+$output: #F0F3BD;
+$special-output: rgb(250, 216, 165);
 
 .container {
   position: relative;
 
+  .header {
+    background-color: $head-color;
+  }
+
   h1 {
-    font-family: $poiret;
+    font-family: $vidaloka;
   }
 
   #poweredBy {
-    font-family: $poiret;
+    padding-bottom:10px;
   }
 
   h2 {
-    font-family: $poiret;
+    font-family: $vidaloka;
   }
 
   .row {
@@ -25,7 +33,7 @@ $in-progress:rgba(250, 107, 71, 0.808);
       width: 100%;
       height: 400px;
       overflow: scroll;
-      background-color: rgb(255, 245, 227);
+      background-color: $output;
       text-align: left;
 
       li {
@@ -65,7 +73,7 @@ $in-progress:rgba(250, 107, 71, 0.808);
   }
 
   #getOneStyle {
-    background-color: rgb(255, 226, 173);
+    background-color: $special-output;
 
     * {
       padding-left: 10px;
