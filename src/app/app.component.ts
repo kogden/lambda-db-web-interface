@@ -31,8 +31,8 @@ export class AppComponent {
 
   create(title, desc) {
     const toJson = {
-      'title': title,
-      'description': desc,
+      title: title,
+      description: desc
     };
 
     const options = {
@@ -40,21 +40,21 @@ export class AppComponent {
       port: '80',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
     };
 
     this.http.post(this.baseUrl, toJson, options).subscribe(
-      (val) => {
-          console.log('POST call successful value returned in body',
-                      val);
+      val => {
+        console.log('POST call successful value returned in body', val);
       },
       response => {
-          console.log('POST call in error', response);
+        console.log('POST call in error', response);
       },
       () => {
-          console.log('The POST observable is now completed.');
-      });
+        console.log('The POST observable is now completed.');
+      }
+    );
   }
 
   delete(id) {
@@ -64,20 +64,21 @@ export class AppComponent {
       port: '80',
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
     };
 
     this.http.delete(deleteUrl, options).subscribe(
-      (val) => {
-          console.log('DELETE call successful value returned in body', val);
+      val => {
+        console.log('DELETE call successful value returned in body', val);
       },
       response => {
-          console.log('DELETE call in error', response);
+        console.log('DELETE call in error', response);
       },
       () => {
-          console.log('The DELETE observable is now completed.');
-      });
+        console.log('The DELETE observable is now completed.');
+      }
+    );
   }
 
   update(id, title, desc) {
@@ -87,24 +88,25 @@ export class AppComponent {
       port: '80',
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
     };
 
     const toJson = {
-      'title': title,
-      'description': desc,
+      title: title,
+      description: desc
     };
 
     this.http.put(updateUrl, toJson, options).subscribe(
-      (val) => {
-          console.log('PUT call successful value returned in body', val);
+      val => {
+        console.log('PUT call successful value returned in body', val);
       },
       response => {
-          console.log('PUT call in error', response);
+        console.log('PUT call in error', response);
       },
       () => {
-          console.log('The PUT observable is now completed.');
-      });
+        console.log('The PUT observable is now completed.');
+      }
+    );
   }
 }
