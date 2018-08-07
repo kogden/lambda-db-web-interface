@@ -29,7 +29,7 @@ export class AppComponent {
     });
   }
 
-  calculate() {
+  calculate() {   // Calculates time for lambda functions to execute
     this.timeToExecute = Math.round((this.t1 - this.t0) * 100) / 100;
     console.log('Lambda call took ' + this.timeToExecute + ' milliseconds.');
   }
