@@ -2,46 +2,45 @@
 <div class="container">
   <div class="header">
     <h1 class="text-center">Welcome to the Movie Database Interface</h1>
-    <p class="text-center" id="poweredBy">Powered by MongoDB and AWS Lambda Functions</p>
+    <p class="text-center" id="poweredBy">Powered by MongoDB and AWS Lambda Function calls</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Popcorn_Time_logo.png" alt="Image of Popcorn for Movies" id="popcornPic" class="d-none d-lg-block">
   </div>
 
   <div class="row options">
-
     <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
-        <button class="btn-primary" id="noInput" (click)="getAll()">Get All</button>
+        <button class="btn-primary" (click)="getAll()">Get All</button>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
+        <button class="btn-primary" (click)="getOne(getonebox.value); getonebox.value = '' ">Get One</button>
         <input type="text" name="getOne" placeholder="Id..." id="takeId" #getonebox>
-        <button class="btn-primary" id="noInput" (click)="getOne(getonebox.value); getonebox.value = '' ">Get One</button>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="post" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
+        <button class="btn-primary" (click)="create(titleenter.value, descenter.value); titleenter.value = ''; descenter.value = '';">Create</button>
         <input type="text" name="create" placeholder="Title" id="titleEntry" #titleenter>
         <input type="text" name="create" placeholder="Description..." id="descEntry" #descenter>
-        <button class="btn-primary" (click)="create(titleenter.value, descenter.value); titleenter.value = ''; descenter.value = '';"
-          id="noInput">Create</button>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get">
+        <button class="btn-primary" (click)="update(entid.value, enttit.value, entdesc.value); entid.value = ''; enttit.value = ''; entdesc.value = '';">Update</button>
         <input type="text" name="update" placeholder="Id..." #entid>
         <input type="text" name="create" placeholder="Title" id="titleEntry" #enttit>
         <input type="text" name="create" placeholder="Description..." #entdesc>
-        <button class="btn-primary" id="noInput" (click)="update(entid.value, enttit.value, entdesc.value); entid.value = ''; enttit.value = ''; entdesc.value = '';">Update</button>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get">
+        <button class="btn-primary" (click)="delete(deletebox.value); deletebox.value = '' ">Delete</button>
         <input type="text" name="delete" placeholder="Id..." #deletebox>
-        <button class="btn-primary" id="noInput" (click)="delete(deletebox.value); deletebox.value = '' ">Delete</button>
       </form>
     </div>
 

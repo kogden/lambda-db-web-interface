@@ -10,32 +10,42 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'app';
-  movies: Movie[];
-  oneMovie: Movie;
-  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes';
+  movies: Movie[];      // List of movie elements in db
+  oneMovie: Movie;      // Select one movie from list
+  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes';   // AWS url we call to hit lambda funcs
+  samp = document.getElementsByTagName('samp');   // Grab samp element
 
   constructor(private movieService: AppService, private http: HttpClient) {}
 
-  getAll(): void {
+  scrollSampUp(): void {    // Scrolls to top of samp element upon refresh
+    this.samp[0].scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  getAll(): void {          // GETs entire database, also used as refresh upon updates
     this.movieService.getAll().subscribe(data => {
       this.movies = data;
       console.log(data);
     });
+    this.scrollSampUp();
   }
 
-  getOne(id): void {
+  getOne(id): void {        // GETs one entry with specific and highlights
     this.movieService.getAll().subscribe(data => {
       this.oneMovie = data.find(movie => movie._id === id);
     });
+    this.scrollSampUp();
   }
 
-  create(title, desc) {
+  create(title, desc) {     // POST new element in database
     const toJson = {
       title: title,
       description: desc
     };
 
-    const options = {
+    const options = {       // POST request options
       host: this.baseUrl,
       port: '80',
       method: 'POST',
@@ -44,7 +54,7 @@ export class AppComponent {
       }
     };
 
-    this.http.post(this.baseUrl, toJson, options).subscribe(
+    this.http.post(this.baseUrl, toJson, options).subscribe(      // POST, log outcome
       val => {
         console.log('POST call successful value returned in body', val);
       },
@@ -57,7 +67,7 @@ export class AppComponent {
     );
   }
 
-  delete(id) {
+  delete(id) {                        // DELETE req
     const deleteUrl = this.baseUrl + '/' + id;
     const options = {
       host: deleteUrl,
@@ -81,7 +91,7 @@ export class AppComponent {
     );
   }
 
-  update(id, title, desc) {
+  update(id, title, desc) {   // PUT req
     const updateUrl = this.baseUrl + '/' + id;
     const options = {
       host: updateUrl,
