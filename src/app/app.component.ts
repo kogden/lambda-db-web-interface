@@ -12,9 +12,7 @@ export class AppComponent {
   title = 'app';
   movies: Movie[];
   oneMovie: Movie;
-  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes';
-
-
+  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes';
 
   constructor(private movieService: AppService, private http: HttpClient) {}
 
@@ -29,7 +27,6 @@ export class AppComponent {
     this.movieService.getAll().subscribe(data => {
       this.oneMovie = data.find(movie => movie._id === value);
     });
-
   }
 
   create() {
@@ -61,6 +58,29 @@ export class AppComponent {
       () => {
           console.log('The POST observable is now completed.');
       });
-    debugger;
+  }
+
+  delete(value) {
+    const deleteUrl = this.baseUrl + '/' + value;
+    const options = {
+      host: deleteUrl,
+      port: '80',
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+
+    this.http.delete(deleteUrl, options).subscribe(
+      (val) => {
+          console.log('POST call successful value returned in body',
+                      val);
+      },
+      response => {
+          console.log('POST call in error', response);
+      },
+      () => {
+          console.log('The POST observable is now completed.');
+      });
   }
 }

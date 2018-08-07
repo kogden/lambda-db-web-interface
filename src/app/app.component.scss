@@ -11,6 +11,13 @@
       cursor:pointer;
     }
   }
+
+  .working {
+    background-color:rgba(103, 255, 103, 0.486);
+  }
+  .in-progress {
+    background-color:rgba(250, 107, 71, 0.808);
+  }
 }
 
 .container {
@@ -36,4 +43,8 @@ samp {
 
 li {
   list-style: none;
+}
+
+.options {
+  height:300px;
 }

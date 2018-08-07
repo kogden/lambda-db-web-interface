@@ -7,7 +7,7 @@ import { Movie } from '../assets/Movie';
   providedIn: 'root'
 })
 export class AppService {
-  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes';
+  baseUrl = 'https://vivycsg88i.execute-api.us-east-1.amazonaws.com/dev/notes';
 
   constructor(private http: HttpClient) {}
 

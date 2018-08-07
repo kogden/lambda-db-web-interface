@@ -2,47 +2,59 @@
 <div class="container">
   <h1 class="text-center">Welcome to the Movie Database Interface</h1>
   <h3 class="text-center">Powered by MongoDB and AWS Lambda Functions</h3>
-  <div class="row">
+  <div class="row options">
 
-    <div class="col text-center">
+    <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <button class="btn-success" id="noInput" (click)="getAll()">Get All</button>
       </form>
     </div>
 
-    <div class="col text-center">
+    <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <input type="text" name="getOne" placeholder="Id..." id="takeId" #getonebox>
-        <button class="btn-success" (click)="getOne(getonebox.value)">Get One</button>
+        <button class="btn-success" id="noInput" (click)="getOne(getonebox.value)">Get One</button>
       </form>
     </div>
 
-    <div class="col text-center">
+    <div class="col text-center working">
       <form target="_self" method="post" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <input type="text" name="create" placeholder="Title" id="titleEntry">
         <input type="text" name="create" placeholder="Description..." id="descEntry">
-        <button class="btn-success" (click)="create()">Create Entry</button>
+        <button class="btn-success" (click)="create()" id="noInput">Create</button>
       </form>
     </div>
 
-    <div class="col text-center">
+    <div class="col text-center in-progress">
       <form target="_self" method="get">
         <input type="text" name="update" placeholder="Id...">
-        <button class="btn-success">Update Entry</button>
+        <input type="text" name="create" placeholder="Title" id="titleEntry">
+        <input type="text" name="create" placeholder="Description...">
+        <button class="btn-success" id="noInput">Update</button>
       </form>
     </div>
 
-    <div class="col text-center">
+    <div class="col text-center working">
       <form target="_self" method="get">
-        <input type="text" name="delete" placeholder="Id...">
-        <button class="btn-success">Delete Entry</button>
+        <input type="text" name="delete" placeholder="Id..." #deletebox>
+        <button class="btn-success" id="noInput" (click)="delete(deletebox.value)">Delete</button>
       </form>
     </div>
 
   </div>
-  <div class="row text-center">
+  <div class="row">
     <h2>Output:</h2>
     <samp>
+      <div *ngIf="oneMovie">
+        <h5>
+          {{ oneMovie.title }}
+        </h5>
+        <p>
+          "{{ oneMovie.description }}"
+          <br>
+          id: {{ oneMovie._id }}
+        </p>
+      </div>
       <ul *ngIf="movies">
         <li *ngFor="let movie of movies">
           <h5>
@@ -56,17 +68,6 @@
           <hr>
         </li>
       </ul>
-      <div *ngIf="oneMovie">
-        <h5>
-          {{ oneMovie.title }}
-        </h5>
-        <p>
-          "{{ oneMovie.description }}"
-          <br>
-          id: {{ oneMovie._id }}
-        </p>
-      </div>
-      Boop beep bop
     </samp>
   </div>
 </div>
