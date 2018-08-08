@@ -17,31 +17,39 @@
     <div class="col text-center working">
       <form target="_self" method="get" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <button class="btn-primary" (click)="getOne(getonebox.value); getonebox.value = '' ">Get One</button>
-        <input type="text" name="getOne" placeholder="Id..." #getonebox>
+        <div class="inputContain">
+          <input type="text" name="getOne" placeholder="Id..." #getonebox>
+        </div>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="post" action="https://vivycsg88i.execute-api.us-east-1.amazonaws.com/Public/notes/">
         <button class="btn-primary" (click)="create(titleenter.value, descenter.value); titleenter.value = ''; descenter.value = '';">Create</button>
-        <input type="text" name="create" placeholder="Title" #titleenter>
-        <input type="text" name="create" placeholder="Description..." id="descEntry" #descenter>
+        <div class="inputContain">
+          <input type="text" name="create" placeholder="Title" #titleenter>
+          <input type="text" name="create" placeholder="Description..." id="descEntry" #descenter>
+        </div>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get">
         <button class="btn-primary" (click)="update(entid.value, enttit.value, entdesc.value); entid.value = ''; enttit.value = ''; entdesc.value = '';">Update</button>
-        <input type="text" name="update" placeholder="Id..." #entid>
-        <input type="text" name="create" placeholder="Title" #enttit>
-        <input type="text" name="create" placeholder="Description..." #entdesc>
+        <div class="inputContain">
+          <input type="text" name="update" placeholder="Id..." #entid>
+          <input type="text" name="create" placeholder="Title" #enttit>
+          <input type="text" name="create" placeholder="Description..." #entdesc>
+        </div>
       </form>
     </div>
 
     <div class="col text-center working">
       <form target="_self" method="get">
         <button class="btn-primary" (click)="delete(deletebox.value); deletebox.value = '' ">Delete</button>
-        <input type="text" name="delete" placeholder="Id..." #deletebox>
+        <div class="inputContain">
+          <input type="text" name="delete" placeholder="Id..." #deletebox>
+        </div>
       </form>
     </div>
 
